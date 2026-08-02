@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online School UX Assessment | Nítida Web</title>
+  <meta name="description" content="A focused 7-day assessment of how an online school explains its offer, earns trust, and moves prospective students toward enrollment. Fixed fee: USD 750.">
+  <meta property="og:title" content="Online School UX Assessment | Nítida Web">
+  <meta property="og:description" content="A 7-day conversion assessment with a prioritized roadmap and key-page wireframe. Fixed fee: USD 750.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nitida-web.github.io/online-school-audit.html">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --ink: #102a33;
+      --deep: #173f4a;
+      --paper: #fbf8f1;
+      --cream: #f1ebde;
+      --coral: #e95c45;
+      --lime: #d7f55a;
+      --muted: #56666c;
+      --line: #d8d0c3;
+      --white: #fff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .skip {
+      position: absolute;
+      left: -9999px;
+      top: 8px;
+      z-index: 100;
+      padding: .8rem 1rem;
+      background: var(--lime);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .skip:focus { left: 8px; }
+    .shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin-inline: auto;
+    }
+    .eyebrow {
+      margin: 0 0 .9rem;
+      color: var(--coral);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      letter-spacing: -.045em;
+    }
+    h1 {
+      max-width: 830px;
+      margin-bottom: 1.4rem;
+      font-size: clamp(3rem, 8vw, 6.7rem);
+      line-height: .94;
+    }
+    h1 em {
+      color: var(--coral);
+      font-weight: 400;
+    }
+    h2 {
+      margin-bottom: 1.2rem;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 1;
+    }
+    h3 {
+      font-size: 1.06rem;
+      line-height: 1.25;
+    }
+    p { color: var(--muted); }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      text-decoration: none;
+      font-size: .96rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .brand span { color: var(--coral); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:last-child {
+      padding: .7rem 1rem;
+      color: var(--paper);
+      background: var(--ink);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 5rem;
+      align-items: end;
+      padding-block: clamp(5rem, 10vw, 9rem) 4.5rem;
+    }
+    .lead {
+      max-width: 690px;
+      margin-bottom: 2rem;
+      color: var(--ink);
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+      line-height: 1.45;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: .8rem 1.1rem;
+      border: 1px solid var(--ink);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .button.primary {
+      color: var(--paper);
+      background: var(--ink);
+    }
+    .button.secondary { background: transparent; }
+    .hero-card {
+      padding: 1.7rem;
+      color: var(--paper);
+      background: var(--ink);
+      box-shadow: 18px 18px 0 var(--lime);
+    }
+    .hero-card span {
+      display: block;
+      color: var(--lime);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .hero-card strong {
+      display: block;
+      margin: .5rem 0 1.3rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.8rem;
+      line-height: 1;
+    }
+    .hero-card p {
+      margin: 0;
+      color: #d9e2e4;
+      font-size: .9rem;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--ink);
+      background: var(--ink);
+    }
+    .metric {
+      min-height: 155px;
+      padding: 2rem;
+      color: var(--white);
+      border-right: 1px solid #46606a;
+    }
+    .metric:last-child { border-right: 0; }
+    .metric strong {
+      display: block;
+      margin-bottom: .6rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1;
+    }
+    .metric span {
+      color: var(--lime);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .section { padding-block: clamp(5rem, 9vw, 8rem); }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .7fr);
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 3rem;
+    }
+    .intro p { margin-bottom: .5rem; }
+    .friction { background: var(--cream); }
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+    }
+    .stage {
+      position: relative;
+      min-height: 300px;
+      padding: 2rem;
+      background: var(--paper);
+      border-right: 1px solid var(--line);
+    }
+    .stage:last-child { border-right: 0; }
+    .stage-number {
+      display: inline-grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      margin-bottom: 3.4rem;
+      color: var(--paper);
+      background: var(--coral);
+      border-radius: 50%;
+      font-size: .76rem;
+      font-weight: 900;
+    }
+    .stage p { margin-bottom: 0; }
+    .stage::after {
+      content: "";
+      position: absolute;
+      top: 49px;
+      right: -18px;
+      z-index: 2;
+      width: 35px;
+      height: 1px;
+      background: var(--coral);
+    }
+    .stage:last-child::after { display: none; }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .review-card {
+      min-height: 220px;
+      padding: 1.8rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .review-card span {
+      display: block;
+      margin-bottom: 3rem;
+      color: var(--coral);
+      font-size: .75rem;
+      font-weight: 900;
+    }
+    .review-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+    }
+    .deliverables {
+      color: var(--paper);
+      background: var(--deep);
+    }
+    .deliverables .eyebrow { color: var(--lime); }
+    .deliverables h2 { color: var(--white); }
+    .deliverables .intro p { color: #d9e2e4; }
+    .deliverable-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: #58717a;
+      border: 1px solid #58717a;
+    }
+    .deliverable {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1rem;
+      min-height: 120px;
+      padding: 1.6rem;
+      background: var(--deep);
+    }
+    .deliverable span {
+      color: var(--lime);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.8rem;
+    }
+    .deliverable h3 { color: var(--white); }
+    .deliverable p {
+      margin-bottom: 0;
+      color: #d9e2e4;
+      font-size: .9rem;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .timeline { border-top: 1px solid var(--line); }
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 75px 160px 1fr;
+      gap: 1.2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-row strong:first-child { color: var(--coral); }
+    .timeline-row p { margin: 0; }
+    .sample-box {
+      align-self: start;
+      padding: 2rem;
+      background: var(--lime);
+      border: 1px solid var(--ink);
+    }
+    .sample-box p { color: var(--ink); }
+    .sample-box .button { width: 100%; }
+    .pricing {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(0, 1fr);
+      gap: 1px;
+      padding: 1px;
+      background: var(--ink);
+    }
+    .price {
+      padding: clamp(2rem, 5vw, 4rem);
+      color: var(--paper);
+      background: var(--ink);
+    }
+    .price .eyebrow { color: var(--lime); }
+    .price strong {
+      display: block;
+      margin: .3rem 0 1.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4rem, 9vw, 7rem);
+      line-height: .9;
+    }
+    .price p { color: #d9e2e4; }
+    .scope {
+      padding: clamp(2rem, 5vw, 4rem);
+      background: var(--cream);
+    }
+    .scope ul {
+      margin: 0 0 2rem;
+      padding: 0;
+      list-style: none;
+    }
+    .scope li {
+      padding: .72rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .scope li::before {
+      content: "+";
+      margin-right: .7rem;
+      color: var(--coral);
+      font-weight: 900;
+    }
+    .disclosure {
+      margin-top: 2rem;
+      padding: 1rem 1.2rem;
+      color: var(--ink);
+      background: var(--lime);
+      font-size: .84rem;
+    }
+    footer {
+      padding: 3rem 0;
+      color: var(--paper);
+      background: var(--ink);
+    }
+    .footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    footer p { margin: .5rem 0 0; color: #d9e2e4; }
+    footer a { color: var(--lime); font-weight: 800; }
+
+    @media (max-width: 880px) {
+      .hero, .intro, .process-grid, .pricing { grid-template-columns: 1fr; }
+      .hero { gap: 3rem; }
+      .hero-card { max-width: 430px; }
+      .metrics, .journey, .review-grid { grid-template-columns: 1fr; }
+      .metric, .stage { border-right: 0; border-bottom: 1px solid #46606a; }
+      .stage { border-bottom-color: var(--line); }
+      .metric:last-child, .stage:last-child { border-bottom: 0; }
+      .stage::after { display: none; }
+      .review-card { min-height: 170px; }
+      .deliverable-list { grid-template-columns: 1fr; }
+      .timeline-row { grid-template-columns: 52px 1fr; }
+      .timeline-row p { grid-column: 2; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(calc(100% - 28px), var(--max)); }
+      .nav { min-height: 66px; }
+      .nav-links a:not(:last-child) { display: none; }
+      .hero { padding-top: 4rem; }
+      h1 { font-size: clamp(3.2rem, 16vw, 5.1rem); }
+      .actions { flex-direction: column; }
+      .button { width: 100%; }
+      .deliverable { grid-template-columns: 34px 1fr; }
+      .footer { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="nav shell" aria-label="Primary navigation">
+    <a class="brand" href="./">NÍTIDA<span>·</span></a>
+    <div class="nav-links">
+      <a href="#method">Method</a>
+      <a href="#deliverables">Deliverables</a>
+      <a href="#price">USD 750</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="hero shell">
+      <div>
+        <p class="eyebrow">Online school UX assessment</p>
+        <h1>Turn interest into a clear <em>enrollment journey.</em></h1>
+        <p class="lead">A focused review of how your education platform explains its offer, earns trust, and moves prospective students from first visit to enrollment.</p>
+        <div class="actions">
+          <a class="button primary" href="#price">See the USD 750 package</a>
+          <a class="button secondary" href="./online-school-audit-sample.pdf">Open the sample PDF</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Assessment summary">
+        <span>One focused engagement</span>
+        <strong>7 days</strong>
+        <p>Journey review, prioritized findings, one key-page wireframe, and a practical implementation roadmap.</p>
+      </aside>
+    </header>
+
+    <section class="metrics shell" aria-label="Offer metrics">
+      <div class="metric"><strong>7</strong><span>day delivery</span></div>
+      <div class="metric"><strong>$750</strong><span>fixed fee</span></div>
+      <div class="metric"><strong>1</strong><span>prioritized roadmap</span></div>
+    </section>
+
+    <section class="section friction" id="method">
+      <div class="shell">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">The decision path</p>
+            <h2>Students do not enroll in a single click.</h2>
+          </div>
+          <p>They move through a sequence of questions. The assessment identifies where clarity, confidence, or momentum breaks down.</p>
+        </div>
+        <div class="journey">
+          <article class="stage">
+            <span class="stage-number">01</span>
+            <h3>Understand</h3>
+            <p>Can a first-time visitor explain the program, audience, outcome, format, and next step?</p>
+          </article>
+          <article class="stage">
+            <span class="stage-number">02</span>
+            <h3>Trust</h3>
+            <p>Does the right evidence appear at the moment of doubt, or is proof buried somewhere else?</p>
+          </article>
+          <article class="stage">
+            <span class="stage-number">03</span>
+            <h3>Enroll</h3>
+            <p>Are the commitment, application steps, response time, and expectations easy to predict?</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="intro">
+        <div>
+          <p class="eyebrow">What I review</p>
+          <h2>Six lenses. One enrollment goal.</h2>
+        </div>
+        <p>Every observation is tied to a user question, likely impact, and concrete recommendation. No generic list of visual preferences.</p>
+      </div>
+      <div class="review-grid">
+        <article class="review-card"><span>01</span><h3>Offer clarity</h3><p>Audience, outcome, program structure, learning format, and value.</p></article>
+        <article class="review-card"><span>02</span><h3>Program choice</h3><p>How visitors compare options and identify the right path for their goal or level.</p></article>
+        <article class="review-card"><span>03</span><h3>Trust placement</h3><p>Instructor credibility, student outcomes, FAQs, and risk reduction near decisions.</p></article>
+        <article class="review-card"><span>04</span><h3>Navigation</h3><p>Whether key pages, actions, and information match the visitor's mental model.</p></article>
+        <article class="review-card"><span>05</span><h3>Mobile friction</h3><p>Scanability, action visibility, form effort, and the full path on smaller screens.</p></article>
+        <article class="review-card"><span>06</span><h3>Enrollment steps</h3><p>What happens before, during, and immediately after application or checkout.</p></article>
+      </div>
+    </section>
+
+    <section class="section deliverables" id="deliverables">
+      <div class="shell">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">Deliverables</p>
+            <h2>A package built for decisions.</h2>
+          </div>
+          <p>The output separates urgent friction from worthwhile improvements and gives your team a sequence it can actually implement.</p>
+        </div>
+        <div class="deliverable-list">
+          <article class="deliverable"><span>01</span><div><h3>Annotated experience review</h3><p>Evidence-based observations across the pages and journey in scope.</p></div></article>
+          <article class="deliverable"><span>02</span><div><h3>Prioritized issue list</h3><p>Problems ranked by business impact, user impact, and implementation effort.</p></div></article>
+          <article class="deliverable"><span>03</span><div><h3>Key-page wireframe</h3><p>A clear proposed structure for the page with the highest conversion leverage.</p></div></article>
+          <article class="deliverable"><span>04</span><div><h3>Implementation roadmap</h3><p>Quick wins, structural changes, dependencies, and a sensible order of work.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="process-grid">
+        <div>
+          <p class="eyebrow">Seven-day process</p>
+          <h2>From observation to action.</h2>
+          <div class="timeline">
+            <div class="timeline-row"><strong>01</strong><strong>Scope and access</strong><p>Confirm goals, audiences, programs, and pages.</p></div>
+            <div class="timeline-row"><strong>02-03</strong><strong>Journey review</strong><p>Inspect desktop and mobile from discovery to enrollment.</p></div>
+            <div class="timeline-row"><strong>04</strong><strong>Evidence</strong><p>Document issues with context, severity, and rationale.</p></div>
+            <div class="timeline-row"><strong>05</strong><strong>Wireframe</strong><p>Restructure the page with the highest leverage.</p></div>
+            <div class="timeline-row"><strong>06</strong><strong>Roadmap</strong><p>Sequence changes by impact, effort, and dependency.</p></div>
+            <div class="timeline-row"><strong>07</strong><strong>Review</strong><p>Walk through findings and implementation questions.</p></div>
+          </div>
+        </div>
+        <aside class="sample-box">
+          <p class="eyebrow">See the method</p>
+          <h3>Independent sample assessment</h3>
+          <p>The three-page sample shows the friction map, priority system, delivery plan, and outputs. It uses a fictional scenario and does not claim client results.</p>
+          <a class="button primary" href="./online-school-audit-sample.pdf">Open the PDF</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section shell" id="price">
+      <div class="pricing">
+        <div class="price">
+          <p class="eyebrow">Fixed assessment package</p>
+          <strong>USD 750</strong>
+          <p>One defined scope. One week. No hourly ambiguity.</p>
+        </div>
+        <div class="scope">
+          <h3>Included</h3>
+          <ul>
+            <li>Full journey review within the agreed scope</li>
+            <li>Desktop and mobile observations</li>
+            <li>Prioritized issue list</li>
+            <li>Wireframe for one key conversion page</li>
+            <li>Quick-win checklist</li>
+            <li>Phased implementation roadmap</li>
+            <li>Final walkthrough and questions</li>
+          </ul>
+          <a class="button primary" href="mailto:nitida.web@proton.me?subject=Online%20school%20UX%20assessment">Discuss the assessment</a>
+          <div class="disclosure"><strong>Clear boundary:</strong> this is an assessment and roadmap. Full implementation can be scoped separately after the findings are agreed.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer shell">
+      <div>
+        <a class="brand" href="./">NÍTIDA<span>·</span></a>
+        <p>Clearer paths from interest to enrollment.</p>
+      </div>
+      <a href="mailto:nitida.web@proton.me">nitida.web@proton.me</a>
+    </div>
+  </footer>
+</body>
+</html>
