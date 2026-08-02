@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema de landings locales | Muestra Nítida Web</title>
+  <meta name="description" content="Muestra conceptual de un sistema reutilizable de landing pages locales para captar solicitudes de presupuesto por servicio y zona.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --ink: #17231f;
+      --paper: #f4f0e8;
+      --white: #fffdf8;
+      --green: #174f3e;
+      --green-2: #236d56;
+      --orange: #f16d3a;
+      --orange-2: #ffb28f;
+      --line: #d8d2c6;
+      --muted: #617068;
+      --shadow: 0 24px 70px rgba(23, 35, 31, .14);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; }
+    .shell { width: min(calc(100% - 38px), var(--max)); margin-inline: auto; }
+    .skip { position: absolute; left: -9999px; top: 8px; z-index: 50; padding: .8rem 1rem; background: var(--white); }
+    .skip:focus { left: 8px; }
+
+    .concept {
+      padding: .62rem 1rem;
+      color: #fff;
+      background: var(--ink);
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 1.5rem;
+    }
+    .brand { display: flex; align-items: center; gap: .72rem; text-decoration: none; font-size: 1.08rem; font-weight: 900; letter-spacing: -.03em; }
+    .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; color: white; background: var(--green); border-radius: 10px 10px 3px 10px; }
+    .nav-links { display: flex; align-items: center; gap: 1.4rem; color: var(--muted); font-size: .9rem; font-weight: 700; }
+    .nav-links a { text-decoration: none; }
+    .nav-cta { padding: .72rem 1rem; color: #fff !important; background: var(--green); border-radius: 999px; }
+
+    .hero { padding: 4.4rem 0 5rem; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(330px, .75fr); gap: clamp(2.2rem, 6vw, 6.5rem); align-items: center; }
+    .eyebrow { margin: 0 0 1.1rem; color: var(--green-2); font-size: .76rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 500; letter-spacing: -.045em; }
+    h1 { max-width: 760px; margin-bottom: 1.35rem; font-size: clamp(3.25rem, 7.3vw, 6.65rem); line-height: .92; }
+    h1 em { color: var(--orange); font-weight: 500; }
+    .lead { max-width: 650px; margin-bottom: 1.8rem; color: #43524b; font-size: clamp(1.06rem, 2vw, 1.3rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: .86rem 1.2rem; border: 0; border-radius: 12px; text-decoration: none; font-weight: 850; cursor: pointer; }
+    .button.primary { color: white; background: var(--green); box-shadow: 0 12px 28px rgba(23, 79, 62, .2); }
+    .button.secondary { color: var(--green); background: transparent; border: 1px solid #a7b2ab; }
+    .mini-proof { display: flex; flex-wrap: wrap; gap: .7rem 1.2rem; margin-top: 1.7rem; color: var(--muted); font-size: .84rem; font-weight: 750; }
+    .mini-proof span::before { content: "✓"; margin-right: .38rem; color: var(--green-2); }
+
+    .quote-card { position: relative; padding: 1.45rem; background: var(--white); border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow); }
+    .quote-card::before { content: ""; position: absolute; inset: -18px -24px auto auto; z-index: -1; width: 130px; height: 130px; background: var(--orange-2); border-radius: 50%; filter: blur(1px); }
+    .quote-card h2 { margin-bottom: .4rem; font-family: inherit; font-size: 1.3rem; font-weight: 900; letter-spacing: -.025em; }
+    .quote-card > p { margin-bottom: 1.2rem; color: var(--muted); font-size: .9rem; }
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    label { display: grid; gap: .35rem; color: #34463e; font-size: .78rem; font-weight: 800; }
+    input, select, textarea { width: 100%; padding: .8rem .85rem; color: var(--ink); background: #fff; border: 1px solid #cfc9bd; border-radius: 10px; outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--green-2); box-shadow: 0 0 0 3px rgba(35, 109, 86, .12); }
+    textarea { min-height: 82px; resize: vertical; }
+    .full { grid-column: 1 / -1; }
+    .quote-card .button { width: 100%; margin-top: .8rem; }
+    .form-note { margin: .7rem 0 0 !important; text-align: center; font-size: .74rem !important; }
+    .demo-message { display: none; margin-top: .8rem; padding: .75rem; color: var(--green); background: #e6f1ec; border-radius: 10px; font-size: .83rem; font-weight: 750; }
+
+    .trust-strip { color: white; background: var(--green); }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .trust-grid div { padding: 1.35rem 1.5rem; border-right: 1px solid rgba(255,255,255,.18); }
+    .trust-grid div:last-child { border-right: 0; }
+    .trust-grid strong { display: block; font-size: 1rem; }
+    .trust-grid span { color: #cfe1da; font-size: .82rem; }
+
+    .section { padding: 6.5rem 0; }
+    .section-head { display: grid; grid-template-columns: 1fr .8fr; gap: 3rem; align-items: end; margin-bottom: 2.5rem; }
+    .section h2 { max-width: 760px; margin-bottom: 0; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; }
+    .section-head p { margin-bottom: .25rem; color: var(--muted); }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .service-card { padding: 1.45rem; background: var(--white); border: 1px solid var(--line); border-radius: 16px; }
+    .service-card .icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 1.2rem; color: var(--green); background: #e8eee9; border-radius: 12px; font-size: 1.2rem; }
+    .service-card h3 { margin-bottom: .45rem; font-size: 1.04rem; }
+    .service-card p { margin-bottom: 1rem; color: var(--muted); font-size: .9rem; }
+    .service-card button { padding: 0; color: var(--green); background: none; border: 0; font-weight: 850; cursor: pointer; }
+
+    .system { color: white; background: var(--ink); }
+    .system-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+    .system h2 { margin-bottom: 1.2rem; }
+    .system-copy p { color: #bfcbc5; }
+    .system-list { display: grid; gap: .7rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+    .system-list li { padding: .9rem 1rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; }
+    .system-list strong { color: var(--orange-2); }
+    .generator { padding: 1.25rem; color: var(--ink); background: var(--paper); border-radius: 20px; }
+    .generator-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .generator-top strong { font-size: .92rem; }
+    .live-dot { color: var(--green); font-size: .75rem; font-weight: 850; }
+    .live-dot::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: .35rem; background: #38b47d; border-radius: 50%; }
+    .preview { overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 12px; }
+    .preview-bar { display: flex; gap: 5px; padding: .65rem .8rem; background: #ece8df; }
+    .preview-bar i { width: 7px; height: 7px; background: #c8c1b5; border-radius: 50%; }
+    .preview-body { padding: 1.55rem; }
+    .preview-body small { color: var(--orange); font-weight: 900; letter-spacing: .1em; }
+    .preview-body h3 { max-width: 480px; margin: .6rem 0 .7rem; font-family: Georgia, serif; font-size: clamp(1.8rem, 4vw, 3.2rem); line-height: 1; letter-spacing: -.04em; }
+    .preview-body p { color: var(--muted); }
+    .preview-cta { display: inline-block; padding: .65rem .8rem; color: white; background: var(--green); border-radius: 8px; font-size: .78rem; font-weight: 850; }
+    .generator-controls { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin-top: .8rem; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; counter-reset: step; }
+    .step { position: relative; padding: 1.5rem; border-top: 2px solid var(--green); }
+    .step::before { counter-increment: step; content: "0" counter(step); display: block; margin-bottom: 1.5rem; color: var(--orange); font-size: .8rem; font-weight: 900; letter-spacing: .1em; }
+    .step h3 { margin-bottom: .4rem; }
+    .step p { color: var(--muted); font-size: .9rem; }
+
+    .faq { background: #e8e3d9; }
+    .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 4rem; }
+    .faq h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+    details { border-top: 1px solid #c9c1b5; }
+    details:last-child { border-bottom: 1px solid #c9c1b5; }
+    summary { padding: 1.1rem 0; font-weight: 850; cursor: pointer; }
+    details p { padding-right: 2rem; color: var(--muted); }
+
+    footer { padding: 2.2rem 0; color: #cad3cf; background: var(--ink); }
+    .footer-grid { display: flex; justify-content: space-between; gap: 2rem; align-items: center; font-size: .82rem; }
+    .footer-grid strong { color: white; }
+
+    @media (max-width: 860px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { padding-top: 2.5rem; }
+      .hero-grid, .section-head, .system-grid, .faq-grid { grid-template-columns: 1fr; }
+      .hero-grid { gap: 3rem; }
+      .section-head { gap: 1rem; }
+      .service-grid, .process-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-grid div { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+      .trust-grid div:last-child { border-bottom: 0; }
+      .section { padding: 4.5rem 0; }
+    }
+    @media (max-width: 520px) {
+      .field-grid, .generator-controls { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+      .hero-actions .button { width: 100%; }
+      .footer-grid { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div class="concept">Muestra conceptual de Nítida Web · marca, datos y promesas ficticios</div>
+  <nav class="nav shell" aria-label="Navegación principal">
+    <a class="brand" href="#"><span class="brand-mark">O</span> ObraLocal</a>
+    <div class="nav-links"><a href="#servicios">Servicios</a><a href="#proceso">Proceso</a><a href="#preguntas">Preguntas</a><a class="nav-cta" href="#presupuesto">Pedir presupuesto</a></div>
+  </nav>
+
+  <main id="contenido">
+    <section class="hero">
+      <div class="hero-grid shell">
+        <div>
+          <p class="eyebrow" id="dynamicEyebrow">Pintura profesional en Pocitos</p>
+          <h1><span id="dynamicTitle">Renová tus espacios</span> <em>sin improvisar.</em></h1>
+          <p class="lead" id="dynamicLead">Recibí una visita técnica y un presupuesto claro para tu proyecto de pintura, con alcance, materiales y fechas definidos desde el comienzo.</p>
+          <div class="hero-actions"><a class="button primary" href="#presupuesto">Solicitar presupuesto →</a><a class="button secondary" href="#proceso">Cómo trabajamos</a></div>
+          <div class="mini-proof"><span>Respuesta inicial en 24 h</span><span>Alcance detallado</span><span>Atención local</span></div>
+        </div>
+
+        <form class="quote-card" id="presupuesto">
+          <h2>Contanos qué necesitás</h2>
+          <p>Una consulta breve para preparar mejor la primera respuesta.</p>
+          <div class="field-grid">
+            <label>Nombre<input name="nombre" autocomplete="name" required></label>
+            <label>Teléfono<input name="telefono" autocomplete="tel" inputmode="tel" required></label>
+            <label>Servicio<select name="servicio" id="formService"><option value="pintura">Pintura</option><option value="fontaneria">Fontanería</option><option value="electricidad">Electricidad</option></select></label>
+            <label>Zona<select name="zona" id="formZone"><option>Pocitos</option><option>Cordón</option><option>Parque Rodó</option><option>Centro</option></select></label>
+            <label class="full">Breve descripción<textarea name="detalle" placeholder="Ej.: apartamento de dos dormitorios, paredes interiores..."></textarea></label>
+          </div>
+          <button class="button primary" type="submit">Quiero recibir una respuesta</button>
+          <p class="form-note">Demo: el formulario no envía datos reales.</p>
+          <div class="demo-message" role="status">Así se confirmaría una solicitud conectada al CRM o correo del negocio.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Beneficios del servicio">
+      <div class="trust-grid shell"><div><strong>Presupuesto entendible</strong><span>Qué incluye, materiales y próximos pasos.</span></div><div><strong>Coordinación simple</strong><span>Un solo punto de contacto para el proyecto.</span></div><div><strong>Decisiones informadas</strong><span>Opciones claras antes de comenzar.</span></div></div>
+    </section>
+
+    <section class="section shell" id="servicios">
+      <div class="section-head"><div><p class="eyebrow">Elegí el punto de partida</p><h2>Una página para cada intención de búsqueda.</h2></div><p>En el sistema real, cada servicio y localidad puede tener mensajes, preguntas y llamadas a la acción adaptados sin duplicar el trabajo técnico.</p></div>
+      <div class="service-grid">
+        <article class="service-card"><span class="icon">◩</span><h3>Pintura</h3><p>Interiores, exteriores y preparación de superficies con un alcance claro.</p><button data-service="pintura">Ver versión de pintura →</button></article>
+        <article class="service-card"><span class="icon">⌁</span><h3>Fontanería</h3><p>Reparaciones, instalaciones y diagnóstico inicial según urgencia.</p><button data-service="fontaneria">Ver versión de fontanería →</button></article>
+        <article class="service-card"><span class="icon">ϟ</span><h3>Electricidad</h3><p>Instalaciones y mejoras con información previa sobre el tipo de trabajo.</p><button data-service="electricidad">Ver versión de electricidad →</button></article>
+      </div>
+    </section>
+
+    <section class="section system">
+      <div class="system-grid shell">
+        <div class="system-copy"><p class="eyebrow">Sistema reutilizable</p><h2>Una base sólida. Decenas de variantes relevantes.</h2><p>El objetivo de esta muestra no es una sola landing: es demostrar una arquitectura de contenido que escala por servicio, zona y campaña manteniendo diseño, rendimiento y medición consistentes.</p><ul class="system-list"><li><strong>01</strong> Componentes y estilos compartidos</li><li><strong>02</strong> Contenido variable por servicio y localidad</li><li><strong>03</strong> Formularios y eventos con una misma estructura</li><li><strong>04</strong> Publicación y control de calidad por lotes</li></ul></div>
+        <div class="generator">
+          <div class="generator-top"><strong>Vista previa de variante</strong><span class="live-dot">Actualización en vivo</span></div>
+          <div class="preview"><div class="preview-bar"><i></i><i></i><i></i></div><div class="preview-body"><small id="previewEyebrow">PINTURA · POCITOS</small><h3 id="previewTitle">Renová tus espacios sin improvisar.</h3><p id="previewLead">Presupuesto claro para tu proyecto de pintura.</p><span class="preview-cta">Solicitar presupuesto →</span></div></div>
+          <div class="generator-controls"><label>Servicio<select id="demoService"><option value="pintura">Pintura</option><option value="fontaneria">Fontanería</option><option value="electricidad">Electricidad</option></select></label><label>Zona<select id="demoZone"><option>Pocitos</option><option>Cordón</option><option>Parque Rodó</option><option>Centro</option></select></label></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="proceso">
+      <div class="section-head"><div><p class="eyebrow">Flujo de producción</p><h2>Diseñado para entregar por lotes sin perder calidad.</h2></div><p>Primero se valida una variante. Después se replica la estructura con contenido localizado y una lista de comprobación común.</p></div>
+      <div class="process-grid"><article class="step"><h3>Definir el sistema</h3><p>Servicios, localidades, intención de búsqueda, campos del formulario y convenciones de URL.</p></article><article class="step"><h3>Validar una página piloto</h3><p>Diseño, copy, experiencia móvil, velocidad y conexión del formulario antes de escalar.</p></article><article class="step"><h3>Generar y revisar lotes</h3><p>Variantes por datos, comprobaciones automáticas y revisión visual de casos representativos.</p></article></div>
+    </section>
+
+    <section class="section faq" id="preguntas">
+      <div class="faq-grid shell"><div><p class="eyebrow">Preguntas de implementación</p><h2>Escalar no significa copiar y pegar.</h2></div><div><details open><summary>¿Cómo se evita el contenido duplicado?</summary><p>Cada variante necesita una propuesta, contexto local, preguntas y prueba relevantes. La plantilla comparte estructura; el contenido debe responder a una intención concreta.</p></details><details><summary>¿Se pueden conectar todas las páginas al mismo CRM?</summary><p>Sí. El formulario puede enviar servicio, localidad, campaña y URL de origen como campos para que cada lead llegue correctamente clasificado.</p></details><details><summary>¿Cómo se controla la calidad de decenas de páginas?</summary><p>Con validaciones comunes de enlaces, títulos, metadatos, campos, responsive y rendimiento, más una revisión visual de muestras por lote.</p></details></div></div>
+    </section>
+  </main>
+
+  <footer><div class="footer-grid shell"><span><strong>ObraLocal</strong> · marca ficticia para demostración</span><span>Muestra creada por Nítida Web · 2026</span></div></footer>
+
+  <script>
+    const content = {
+      pintura: { label: 'Pintura profesional', title: 'Renová tus espacios', lead: 'Recibí una visita técnica y un presupuesto claro para tu proyecto de pintura, con alcance, materiales y fechas definidos desde el comienzo.', preview: 'Presupuesto claro para tu proyecto de pintura.' },
+      fontaneria: { label: 'Fontanería local', title: 'Resolvé el problema de raíz', lead: 'Contanos qué sucede y coordiná un diagnóstico para definir la reparación, los materiales y el nivel de urgencia antes de avanzar.', preview: 'Diagnóstico y próximos pasos para tu reparación.' },
+      electricidad: { label: 'Electricidad profesional', title: 'Hacé la mejora con seguridad', lead: 'Describí la instalación o reparación que necesitás y recibí una respuesta inicial con el alcance técnico que debemos verificar.', preview: 'Una primera evaluación clara para tu instalación.' }
+    };
+    const qs = new URLSearchParams(location.search);
+    const initialService = content[qs.get('servicio')] ? qs.get('servicio') : 'pintura';
+    const initialZone = qs.get('zona') || 'Pocitos';
+    const controls = ['demoService', 'formService'].map(id => document.getElementById(id));
+    const zones = ['demoZone', 'formZone'].map(id => document.getElementById(id));
+
+    function update(service, zone) {
+      const item = content[service];
+      document.getElementById('dynamicEyebrow').textContent = `${item.label} en ${zone}`;
+      document.getElementById('dynamicTitle').textContent = item.title;
+      document.getElementById('dynamicLead').textContent = item.lead;
+      document.getElementById('previewEyebrow').textContent = `${item.label} · ${zone}`.toUpperCase();
+      document.getElementById('previewTitle').textContent = `${item.title} sin improvisar.`;
+      document.getElementById('previewLead').textContent = item.preview;
+      controls.forEach(el => el.value = service);
+      zones.forEach(el => { if ([...el.options].some(o => o.value === zone)) el.value = zone; });
+      history.replaceState({}, '', `?servicio=${service}&zona=${encodeURIComponent(zone)}`);
+    }
+
+    controls.forEach(el => el.addEventListener('change', () => update(el.value, document.getElementById('demoZone').value)));
+    zones.forEach(el => el.addEventListener('change', () => update(document.getElementById('demoService').value, el.value)));
+    document.querySelectorAll('[data-service]').forEach(button => button.addEventListener('click', () => { update(button.dataset.service, document.getElementById('demoZone').value); document.querySelector('.system').scrollIntoView({behavior:'smooth'}); }));
+    document.getElementById('presupuesto').addEventListener('submit', event => { event.preventDefault(); event.currentTarget.querySelector('.demo-message').style.display = 'block'; });
+    update(initialService, initialZone);
+  </script>
+</body>
+</html>
